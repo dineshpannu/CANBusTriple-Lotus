@@ -1,20 +1,20 @@
 ![Logo](http://res.cloudinary.com/ddbgan4vk/image/upload/v1427295808/logo_py05gc.svg)
 
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/CANBus-Triple/CANBus-Triple?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
-# CANBus Triple - The car hacking platform
+# This is a fork of CANBus Triple - The car hacking platform
 
 See [CANBus Triple](http://www.canb.us) for more information, or to purchase hardware.
 
 ## About
-This repository contains the base firmware and libraries for the CANBus Triple. 
+This repository contains the base firmware and libraries for the CANBus Triple. It has been extended to include an example to translate CAN output from a Haltech ECU to run a Lotus dash. It has been tested with a Haltech Elite and a 2005 Lotus Exige (UK delivered with white dash) but may work on other variations of both. US delivered Lotus will need km/h coverted to mp/h and degrees C converted to degrees F, which is documented in the code.
+
+The remainder of the readme is largely as the original authors of CANBus Triple published it. Many thanks to them for creating this great platform!
 
 [MCP2515 Library](https://github.com/CANBus-Triple/CANBus-Triple/tree/master/avr/libraries/CANBus/src) | [Examples](https://github.com/CANBus-Triple/CANBus-Triple/tree/master/avr/examples)
 
 
 ## Building
 ### Arduino IDE
-This code is tested with Arduino 1.6.1. [Download](http://arduino.cc/en/Main/Software) and install the appropriate file for your platform.
+This code is tested with Arduino 1.8.9. [Download](http://arduino.cc/en/Main/Software) and install the appropriate file for your platform.
 
 ### Get the code
 Clone this repo / download to your Arduino [Sketchbook](http://arduino.cc/en/guide/Environment#sketchbook)/hardware folder. The path should look like this
@@ -23,7 +23,7 @@ Clone this repo / download to your Arduino [Sketchbook](http://arduino.cc/en/gui
 
 To clone:
 
-``git clone https://github.com/CANBus-Triple/CANBus-Triple.git``
+``git clone https://github.com/dineshpannu/CANBusTriple-Lotus.git``
 
  Or download the zip and extract it to your sketchbook folder.
  
