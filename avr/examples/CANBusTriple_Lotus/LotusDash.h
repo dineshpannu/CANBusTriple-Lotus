@@ -1,6 +1,7 @@
 #ifndef LotusDash_H
 #define LotusDash_H
 
+#include <Arduino.h>
 #include <MessageQueue.h>
 #include "Middleware.h"
 #include "SerialCommand.h"
@@ -23,33 +24,36 @@ class LotusDash : public Middleware
     MessageQueue* mainQueue;
     SerialCommand* serialCommand;
     Haltech* haltech;
-    unsigned long lastServiceCallSent;
+    unsigned long lastPacketSentTime;
     bool isStartup;
     unsigned long sweepStartTime;
-    unsigned long lastSweepSentTime;
-    void updateDash(DashMessage dashMessage);
     void doStartupSequence();
+    void enableGaugeSweep();
+    void updateDash(DashMessage dashMessage);
 };
 
 
-
-
+//
+// COnstructor
+//
 LotusDash::LotusDash( MessageQueue *q, SerialCommand *serCom, Haltech *haltechObj )
 {
-  isStartup = true;
-  sweepStartTime = 0;
-  lastSweepSentTime = 0;
   mainQueue = q;
   serialCommand = serCom;
   haltech = haltechObj;
-  lastServiceCallSent = 0;
+  lastPacketSentTime = 0;
+
+  enableGaugeSweep();
 }
 
+//
+// Public functions
+//
 
 void LotusDash::tick()
 { 
   // Update dash every ~100ms
-  if (millis() >= lastSweepSentTime + 100)
+  if (millis() >= lastPacketSentTime + 100)
   {
     if (isStartup) 
     {
@@ -68,13 +72,36 @@ Message LotusDash::process( Message msg )
 
 void LotusDash::commandHandler(byte* bytes, int length)
 {
+  if (length > 0)
+  {
+    if (0x01 == bytes[0])
+    {
+      // Reset the gauge sweep control variables
+      //
+      enableGaugeSweep();
+    }
+  }
 }
+
+
+//
+// Private functions
+//
 
 void LotusDash::doStartupSequence()
 {
+  if (0 == sweepStartTime)
+  {
+    sweepStartTime = millis();
+    
+    Serial.write("LotusDash::doStartupSequence() Start sweep.");
+    Serial.println();
+  }
+  
   // If needle is on it's way up, keep telling it to go up
   //
-  if (millis() <= lastSweepSentTime + kHalfSweepPeriod)
+  unsigned long sweepMidPoint = sweepStartTime + kHalfSweepPeriod;
+  if (millis() <= sweepMidPoint)
   {
     Serial.write("LotusDash::doStartupSequence() Going up");
     Serial.println();
@@ -96,14 +123,8 @@ void LotusDash::doStartupSequence()
   }
 
 
-  if (0 == sweepStartTime)
-  {
-    sweepStartTime = millis();
-    
-    Serial.write("LotusDash::doStartupSequence() Start sweep.");
-    Serial.println();
-  }
-  else if (millis() > sweepStartTime + (kHalfSweepPeriod * 2))
+  unsigned long sweepEndPoint = sweepStartTime + (kHalfSweepPeriod * 2);
+  if (millis() >= sweepEndPoint)
   {
     // End the sweep
     isStartup = false;
@@ -113,6 +134,12 @@ void LotusDash::doStartupSequence()
   }
 }
 
+
+void LotusDash::enableGaugeSweep()
+{
+  isStartup = true;
+  sweepStartTime = 0;
+}
 
 void LotusDash::updateDash(DashMessage dashMessage)
 {
@@ -138,7 +165,6 @@ void LotusDash::updateDash(DashMessage dashMessage)
   //serialCommand->printMessageToSerial(msg);
   
   mainQueue->push(msg);
-  lastSweepSentTime = millis();
+  lastPacketSentTime = millis();
 }
-
 #endif
