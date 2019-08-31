@@ -1,0 +1,30 @@
+C:\Users\dines\AppData\Local\Temp\VMBuilds\CANBusTriple_Lotus\CANBus-Triple_canbus-triple_avr_canbustriple\Release\CANBusTriple_Lotus.cpp.o: \
+ C:\Users\dines\AppData\Local\Temp\VMBuilds\CANBusTriple_Lotus\CANBus-Triple_canbus-triple_avr_canbustriple\Release\CANBusTriple_Lotus.cpp \
+ C:\Users\dines\Documents\Arduino\hardware\CANBus-Triple\avr\cores\arduino/arduino.h \
+ C:\Users\dines\Documents\Arduino\hardware\CANBus-Triple\avr\cores\arduino/binary.h \
+ C:\Users\dines\Documents\Arduino\hardware\CANBus-Triple\avr\cores\arduino/WCharacter.h \
+ C:\Users\dines\Documents\Arduino\hardware\CANBus-Triple\avr\cores\arduino/WString.h \
+ C:\Users\dines\Documents\Arduino\hardware\CANBus-Triple\avr\cores\arduino/HardwareSerial.h \
+ C:\Users\dines\Documents\Arduino\hardware\CANBus-Triple\avr\cores\arduino/Stream.h \
+ C:\Users\dines\Documents\Arduino\hardware\CANBus-Triple\avr\cores\arduino/Print.h \
+ C:\Users\dines\Documents\Arduino\hardware\CANBus-Triple\avr\cores\arduino/Printable.h \
+ C:\Users\dines\Documents\Arduino\hardware\CANBus-Triple\avr\cores\arduino/USBAPI.h \
+ C:\Users\dines\Documents\Arduino\hardware\CANBus-Triple\avr\cores\arduino/Arduino.h \
+ C:\Users\dines\Documents\Arduino\hardware\CANBus-Triple\avr\cores\arduino/USBDesc.h \
+ C:\Users\dines\Documents\Arduino\hardware\CANBus-Triple\avr\cores\arduino/USBCore.h \
+ C:\Users\dines\Documents\Arduino\hardware\CANBus-Triple\avr\variants\canbustriple/pins_arduino.h \
+ C:\Users\dines\Documents\Arduino\hardware\CANBus-Triple\avr\libraries\SPI/SPI.h \
+ C:\Users\dines\Documents\Arduino\hardware\CANBus-Triple\avr\cores\arduino/Arduino.h \
+ C:\Users\dines\Documents\Arduino\hardware\CANBus-Triple\avr\libraries\EEPROM/EEPROM.h \
+ C:\Users\dines\Documents\Arduino\hardware\CANBus-Triple\avr\libraries\CANBus\src/CANBus.h \
+ C:\Users\dines\Documents\Arduino\hardware\CANBus-Triple\avr\libraries\CANBus\src/MessageQueue.h \
+ C:\Users\dines\AppData\Local\Temp\VMBuilds\CANBusTriple_Lotus\CANBus-Triple_canbus-triple_avr_canbustriple\Release\Middleware.h \
+ C:\Users\dines\AppData\Local\Temp\VMBuilds\CANBusTriple_Lotus\CANBus-Triple_canbus-triple_avr_canbustriple\Release\Settings.h \
+ C:\Users\dines\AppData\Local\Temp\VMBuilds\CANBusTriple_Lotus\CANBus-Triple_canbus-triple_avr_canbustriple\Release\AutoBaud.h \
+ C:\Users\dines\AppData\Local\Temp\VMBuilds\CANBusTriple_Lotus\CANBus-Triple_canbus-triple_avr_canbustriple\Release\SerialCommand.h \
+ C:\Users\dines\AppData\Local\Temp\VMBuilds\CANBusTriple_Lotus\CANBus-Triple_canbus-triple_avr_canbustriple\Release\ServiceCall.h \
+ C:\Users\dines\AppData\Local\Temp\VMBuilds\CANBusTriple_Lotus\CANBus-Triple_canbus-triple_avr_canbustriple\Release\ChannelSwap.h \
+ C:\Users\dines\AppData\Local\Temp\VMBuilds\CANBusTriple_Lotus\CANBus-Triple_canbus-triple_avr_canbustriple\Release\Naptime.h \
+ C:\Users\dines\AppData\Local\Temp\VMBuilds\CANBusTriple_Lotus\CANBus-Triple_canbus-triple_avr_canbustriple\Release\LotusDash.h \
+ C:\Users\dines\AppData\Local\Temp\VMBuilds\CANBusTriple_Lotus\CANBus-Triple_canbus-triple_avr_canbustriple\Release\Haltech.h \
+ C:\Users\dines\AppData\Local\Temp\VMBuilds\CANBusTriple_Lotus\CANBus-Triple_canbus-triple_avr_canbustriple\Release\DashMessage.h
