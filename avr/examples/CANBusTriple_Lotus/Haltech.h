@@ -132,7 +132,7 @@ byte Haltech::getMil()
 void Haltech::extractRPM(Message msg)
 {
 	// Bytes 0-1 are RPM
-	rpm = (int)msg.frame_data[0] << 8;
+	rpm = msg.frame_data[0] << 8;
 	rpm |= msg.frame_data[1];
 }
 
@@ -140,7 +140,7 @@ void Haltech::extractRPM(Message msg)
 void Haltech::extractWheelspeed(Message msg)
 {
 	// Bytes 0-1 are Wheelspeed in 0.1 kmh
-	wheelspeed = (int)msg.frame_data[0] << 8;
+	wheelspeed = msg.frame_data[0] << 8;
 	wheelspeed |= msg.frame_data[1];
 
 	// Conver to kmh
@@ -151,7 +151,7 @@ void Haltech::extractWheelspeed(Message msg)
 void Haltech::extractCooltantTemp(Message msg)
 {
 	// Bytes 0-1 are Coolant Temp in 0.1 Kelvin
-	coolantTemp = (int)msg.frame_data[0] << 8;
+	coolantTemp = msg.frame_data[0] << 8;
 	coolantTemp |= msg.frame_data[1];
 
 	// Convert to K
@@ -164,7 +164,9 @@ void Haltech::extractCooltantTemp(Message msg)
 // 3E2
 void Haltech::extractFuelLevel(Message msg)
 {
-
+  // Bytes 0-1 are Fuel Level
+  fuelLevel = msg.frame_data[0] << 8;
+  fuelLevel |= msg.frame_data[1];
 }
 
 // 3E4
