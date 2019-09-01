@@ -180,8 +180,8 @@ void LotusDash::printDash()
   Serial.println(dashMessage.temperature, DEC);
   Serial.print("Haltech Fuel Level   ");
   Serial.println(haltech->getFuelLevel());
-  //Serial.print("Fuel Level   ");
-  //Serial.println(dashMessage.fuel, DEC);
+  Serial.print("Fuel Level   ");
+  Serial.println(dashMessage.fuel, DEC);
   Serial.print("MIL          ");
   Serial.println(dashMessage.mil, HEX);
 }
@@ -192,16 +192,23 @@ DashMessage LotusDash::translateHaltechToLotus()
   int rpm = haltech->getRpm();
   byte rpm_1 = rpm / 256;
   byte rpm_2 = rpm % 256;
+
+  // Returns fuelLevel in litres. We have a 60L tank, so convert to a percentage of that.
+  int fuelInLitres = haltech->getFuelLevel();
+  byte fuel = (fuelInLitres / 60.0) * 256;
   
+  // Dash needs temp in F, so convert Cel to F and add 14 offset.
+  int coolantTemp = haltech->getCoolantTemp();
+  byte temperature = (((coolantTemp * 9.0 / 5.0) + 32) + 14);
+
   DashMessage dashMessage;
-  dashMessage.speed = haltech->getWheelspeed(); // adjusted speed ~= d(XXh)-11d (61h-->97-11=86 mph) -- FF should be 256kmh
+  dashMessage.speed = (byte)haltech->getWheelspeed(); // adjusted speed ~= d(XXh)-11d (61h-->97-11=86 mph) -- FF should be 256kmh 
   dashMessage.rpm_1 = rpm_1; // tach rpms [d(CCh)*256]+d(DDh) 06 D2 = 1746 rpm -- 27h should be 10,000rpm
   dashMessage.rpm_2 = rpm_2; //  
-  dashMessage.fuel = (haltech->getFuelLevel() / 100) * 255; // fuel level (00=empty, FF=full) d[5] / 256 * 100 -- fuel %
-  dashMessage.temperature = haltech->getCoolantTemp(); // engine temperature ~= d(XXh)-14d (D0-->208-14=194F)
+  dashMessage.fuel = fuel; // fuel level (00=empty, FF=full) d[5] / 256 * 100 -- fuel %
+  dashMessage.temperature = temperature; // engine temperature ~= d(XXh)-14d (D0-->208-14=194F) -- (degC * 9.0 / 5.0)+32)+14
   dashMessage.mil = haltech->getMil(); // MIL 06-on, 04-crank, 00-running, 01-shift light
 
-  //updateDash(dashMessage);
 
   return dashMessage;
 }
@@ -226,9 +233,6 @@ void LotusDash::updateDash(DashMessage dashMessage)
   msg.length = 8;
   msg.dispatch = true;
 
-  //Serial.write("LotusDash::updateDash()");
-  //Serial.println();
-  //serialCommand->printMessageToSerial(msg);
   
   mainQueue->push(msg);
   lastPacketSentTime = millis();

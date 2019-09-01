@@ -115,7 +115,8 @@ int Haltech::getCoolantTemp()
 
 int Haltech::getFuelLevel()
 {
-  return this->fuelLevel;
+  //return this->fuelLevel;
+  return 13;
 }
 
 byte Haltech::getMil()
@@ -164,9 +165,12 @@ void Haltech::extractCooltantTemp(Message msg)
 // 3E2
 void Haltech::extractFuelLevel(Message msg)
 {
-  // Bytes 0-1 are Fuel Level
+  // Bytes 0-1 are Fuel Level in 0.1 Litres
   fuelLevel = msg.frame_data[0] << 8;
   fuelLevel |= msg.frame_data[1];
+
+  // Convert to L
+  fuelLevel = fuelLevel / 10;
 }
 
 // 3E4
@@ -175,12 +179,12 @@ void Haltech::extractMIL(Message msg)
 	// 1st bit in byte 8 indicates MIL
 	if (bitRead(msg.frame_data[7], 0))
 	{
-		mil = 0x06;
+		mil = 0x02;
 	}
 	// 3rd bit in byte 8 indicates limp mode
 	else if (bitRead(msg.frame_data[7], 2))
 	{
-		mil = 0x04; // I hope this blinks
+		mil = 0x02; 
 	}
 	else
 	{
