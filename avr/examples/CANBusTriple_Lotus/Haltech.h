@@ -37,7 +37,7 @@ class Haltech : public Middleware
 };
 
 //
-// COnstructor
+// Constructor
 //
 Haltech::Haltech(SerialCommand* serCom)
 {
@@ -115,8 +115,7 @@ int Haltech::getCoolantTemp()
 
 int Haltech::getFuelLevel()
 {
-  //return this->fuelLevel;
-  return 13;
+  return this->fuelLevel;
 }
 
 byte Haltech::getMil()
@@ -163,14 +162,13 @@ void Haltech::extractCooltantTemp(Message msg)
 }
 
 // 3E2
+//
+// Returns fuel remaining in decilitres
 void Haltech::extractFuelLevel(Message msg)
 {
   // Bytes 0-1 are Fuel Level in 0.1 Litres
   fuelLevel = msg.frame_data[0] << 8;
   fuelLevel |= msg.frame_data[1];
-
-  // Convert to L
-  fuelLevel = fuelLevel / 10;
 }
 
 // 3E4

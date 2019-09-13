@@ -194,8 +194,8 @@ DashMessage LotusDash::translateHaltechToLotus()
   byte rpm_2 = rpm % 256;
 
   // Returns fuelLevel in litres. We have a 60L tank, so convert to a percentage of that.
-  int fuelInLitres = haltech->getFuelLevel();
-  byte fuel = (fuelInLitres / 60.0) * 256;
+  int fuelInDecilitres = haltech->getFuelLevel();
+  byte fuel = (fuelInDecilitres / 600.0) * 256;
   
   // Dash needs temp in F, so convert Cel to F and add 14 offset.
   int coolantTemp = haltech->getCoolantTemp();
